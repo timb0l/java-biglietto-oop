@@ -3,22 +3,24 @@
 // ● con quei dati provare a creare un nuovo Biglietto (gestire eventuali eccezioni con try-catch)
 // ● stampare a video il prezzo del biglietto calcolato
 
+import java.util.Scanner;
+
 public class biglietteria{
     public static void main(String[] args){
         
         Scanner sc = new Scanner(System.in);
 
     while (true) {
-        try{
+        try {
             System.out.print("Insert Km");
             int km = sc.nextInt();
 
-            System.out.print("Insert Age"):
-            int userAge = sc.nextInt():
+            System.out.print("Insert Age");
+            int userAge = sc.nextInt();
 
             sc.nextLine();
+        } catch (Exception e) {
 
-            
         }
     }
 
