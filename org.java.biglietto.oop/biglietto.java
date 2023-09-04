@@ -18,6 +18,7 @@ public class biglietto{
     private static final int flex_date = 90;
     private LocalDate localDate;
     private boolean flexible;
+    private BigDecimal pricekm;
 
     public biglietto(int km, int userAge, String flexible) throws Exception{
 
@@ -34,15 +35,79 @@ public class biglietto{
     private boolean validage(int userAge) {
         return userAge <= 100 &&userAge > 0;
     }
+     public float totalprice(){
+        return totaldisc();
+     }
+     private float totaldisc(){
+        float price = getkm() * getpricekm().floatValue();
+        if (userAge >= 65){
+            price -= price/100 * getdisc_over().floatValue();
+        }
+        if (userAge <= 18){
+            price -= price/100 * getdisc_under().floatValue();
+        }
+        if (flexible){
+            price += price * 0.10;
+        }
+        return  price;
+     }
 
-
-
-    private void setkm(int km) {
+    public LocalDate getExpirationDate() {
+        if (flexible) {
+            return this.localDate.plusDays(flex_date);
+        }
+        return this.localDate.plusDays(date);
     }
-    private void setuserAge(int userAge) {
+
+    public LocalDate getLocalDate() {
+        return localDate;
+    }
+    public boolean isFlexible(){
+        return flexible;
+    }
+    public BigDecimal getpricekm() {
+        return pricekm;
+    }
+    public BigDecimal getdisc_over(){
+        return disc_over;
+    }
+    public static BigDecimal getdisc_under() {
+        return disc_under;
+    }
+
+    private int getkm() {
+        return km;
+    }
+
+    private void setkm(int km) throws Exception {
+        if(!validkm(km)){
+            throw new Exception("invalid km");
+        }
+        this.km = km;
+    }
+    public int getuserAge() {
+        return userAge;
+    }
+
+    private void setuserAge(int userAge) throws Exception {
+        if(!validage(userAge)){
+            throw new Exception("invalid age");
+        }this.userAge = userAge;
     }
     private void setlocalDate(LocalDate now) {
     }
     private void setflexible(String flexible) {
+    }
+
+
+
+
+    @Override
+    public String toString() {
+        return "km; " + getkm()
+                + "age: " + getuserAge()
+                + "flex expiration date: " + isFlexible()
+                + "expiration date: " + getExpirationDate()
+                + "price: " + totalprice();
     }
 }

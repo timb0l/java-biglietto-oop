@@ -19,10 +19,16 @@ public class biglietteria{
             int userAge = sc.nextInt();
 
             sc.nextLine();
+            System.out.print("flexible date? y/n");
+            String flexible = sc.nextLine();
+
+            biglietto ticket = new biglietto(km, userAge, flexible);
+            System.out.println(ticket);
         } catch (Exception e) {
-
+            throw new RuntimeException(e);
         }
+
+    }
     }
 
     }
-}
